@@ -8,6 +8,6 @@ import { CVSchema } from './cv.schema';
   imports: [MongooseModule.forFeature([{ name: 'Cv', schema: CVSchema }])],
   controllers: [CvController],
   providers: [CvService],
-  exports: [CvService]
+  exports: [CvService],
 })
 export class CvModule {}

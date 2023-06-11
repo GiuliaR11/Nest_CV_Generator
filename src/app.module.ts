@@ -8,14 +8,16 @@ import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { CvModule } from './cv/cv.module';
+import { GptModule } from './gpt/gpt.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost:27017/'),
+    MongooseModule.forRoot(process.env.MONGO_DB_URL),
     UserModule,
     AuthModule,
     CvModule,
+    GptModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
