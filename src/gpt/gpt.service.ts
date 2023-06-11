@@ -9,7 +9,7 @@ export class GptService {
     model: OpenAIModels = OpenAIModels.Ada,
     maxTokens = 1,
     temperature = 1,
-  ): Promise<any> {
+  ): Promise<string[]> {
     const configuration = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,
     });
