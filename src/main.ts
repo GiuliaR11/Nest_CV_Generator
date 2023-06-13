@@ -4,7 +4,7 @@ import * as cors from 'cors';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  console.log(process.env.JWT_SECRET)
+  console.log(process.env.MONGO_DB_URL)
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
     .setTitle('CV Generator')
@@ -14,8 +14,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  
+
   app.use(cors());
   await app.listen(4000);
 }
-bootstrap();
+bootstrap().catch((error) => console.log(error));
