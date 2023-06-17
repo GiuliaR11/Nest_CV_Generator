@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { CvController } from './cv.controller';
 import { CvService } from './cv.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { CVSchema } from './cv.schema';
+import { CV } from './cv.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Cv', schema: CVSchema }])],
+  imports: [TypeOrmModule.forFeature([CV])],
   controllers: [CvController],
   providers: [CvService],
   exports: [CvService],

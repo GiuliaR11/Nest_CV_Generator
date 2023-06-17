@@ -13,32 +13,43 @@ export class GptController {
   async getSample(@Res() res: Response) {
     const prompt = 'Create a CV description for a React software developer';
     const maxLength = 1;
-    const data = {
-      prompt,
-      ada: await this.gptService.promptGpt(prompt, OpenAIModels.Ada, maxLength),
-      bbg: await this.gptService.promptGpt(
-        prompt,
-        OpenAIModels.Babbage,
-        maxLength,
-      ),
-      curie: await this.gptService.promptGpt(
-        prompt,
-        OpenAIModels.Curie,
-        maxLength,
-      ),
-      dv2: await this.gptService.promptGpt(
-        prompt,
-        OpenAIModels.Davinci2,
-        maxLength,
-      ),
-      dv3: await this.gptService.promptGpt(
-        prompt,
-        OpenAIModels.Davinci3,
-        maxLength,
-      ),
-    };
 
-    return res.status(HttpStatus.OK).json(data);
+    try {
+      const data = {
+        prompt,
+        ada: await this.gptService.promptGpt(
+          prompt,
+          OpenAIModels.Ada,
+          maxLength,
+        ),
+        bbg: await this.gptService.promptGpt(
+          prompt,
+          OpenAIModels.Babbage,
+          maxLength,
+        ),
+        curie: await this.gptService.promptGpt(
+          prompt,
+          OpenAIModels.Curie,
+          maxLength,
+        ),
+        dv2: await this.gptService.promptGpt(
+          prompt,
+          OpenAIModels.Davinci2,
+          maxLength,
+        ),
+        dv3: await this.gptService.promptGpt(
+          prompt,
+          OpenAIModels.Davinci3,
+          maxLength,
+        ),
+      };
+
+      return res.status(HttpStatus.OK).json(data);
+    } catch (e) {
+      console.log(e);
+
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Post('/models/ada/prompt')
