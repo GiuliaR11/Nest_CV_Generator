@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { CreatePromptBodyDto } from './dto/create-prompt-body.dto';
 import { GptService } from './gpt.service';
 import { Response } from 'express';
