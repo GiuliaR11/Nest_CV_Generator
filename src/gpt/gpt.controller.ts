@@ -1,10 +1,15 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
 import { CreatePromptBodyDto } from './dto/create-prompt-body.dto';
 import { GptService } from './gpt.service';
 import { Response } from 'express';
 import { OpenAIModels } from 'src/enums';
 import { CreatePromptResponseDto } from './dto/create-prompt-response.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 
+@ApiTags('gpt')
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('gpt')
 export class GptController {
   constructor(private readonly gptService: GptService) {}

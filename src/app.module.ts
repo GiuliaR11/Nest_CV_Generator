@@ -13,6 +13,9 @@ import { GptModule } from './gpt/gpt.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
 import { CV } from './cv/cv.entity';
+import { PersonalDetails } from './personal-details/personal-details.entity';
+import { EmploymentHistory } from './employment-history/employment-history.entity';
+import { Education } from './education/education.entity';
 
 @Module({
   imports: [
@@ -25,7 +28,13 @@ import { CV } from './cv/cv.entity';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [User, CV],
+      entities: [
+        User, 
+        CV, 
+        PersonalDetails,
+        Education,
+        EmploymentHistory
+      ],
       logger: 'file',
       synchronize: true,
     }),

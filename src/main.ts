@@ -7,10 +7,13 @@ async function bootstrap() {
   console.log(process.env.MONGO_DB_URL);
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
+    .addSecurity('bearer', {
+      type: 'http',
+      scheme: 'bearer',
+    })
     .setTitle('CV Generator')
     .setDescription('CV Generator')
     .setVersion('1.0')
-    .addTag('cvGen')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

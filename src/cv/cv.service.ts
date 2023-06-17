@@ -7,16 +7,26 @@ import { CV } from './cv.entity';
 export class CvService {
   constructor(
     @InjectRepository(CV)
-    private usersRepository: Repository<CV>,
+    private cvsRepository: Repository<CV>,
   ) {}
 
   // async findAll(): Promise<CV[]> {
   //   return this.cvModel.find().exec();
   // }
 
-  // async findOne(id: string): Promise<CV> {
-  //   return this.cvModel.findById(id).exec();
-  // }
+  async findOne(id: string): Promise<CV> {
+    return this.cvsRepository.findOne(id);
+  }
+
+  async findCVsByUser(userId: string): Promise<CV[]> {
+    return this.cvsRepository.find({
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    });
+  }
 
   // async create(createCVDto: CV): Promise<CV> {
   //   const createdCV = new this.cvModel(createCVDto);

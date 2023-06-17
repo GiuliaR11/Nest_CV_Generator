@@ -1,7 +1,12 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { CvService } from './cv.service';
-import { CV } from './cv.schema';
+import { CV } from './cv.entity';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('cv')
+@ApiBearerAuth()
+@UseGuards(AuthGuard)
 @Controller('cv')
 export class CvController {
   constructor(private readonly cvService: CvService) {}
@@ -15,8 +20,8 @@ export class CvController {
   //   return this.cvService.findAll();
   // }
 
-  // @Get(':id')
-  // async findOne(@Param('id') id: string): Promise<CV> {
-  //   return this.cvService.findOne(id);
-  // }
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<CV> {
+    return this.cvService.findOne(id);
+  }
 }

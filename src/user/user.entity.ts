@@ -15,6 +15,6 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany((type) => CV, (cv) => cv.user)
+  @OneToMany((type) => CV, (cv) => cv.user, { eager: true })
   cvs: CV[];
 }
