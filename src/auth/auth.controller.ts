@@ -8,6 +8,7 @@ import {
   Request,
   UseGuards,
   Res,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -22,18 +23,21 @@ import { Response } from 'express';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @HttpCode(HttpStatus.OK)
   @Post('signIn')
   async signIn(@Body() signInDto: LoginDto, @Res() res: Response) {
-    const token = await this.authService.signIn(
-      signInDto.email,
-      signInDto.password,
-    );
+    const authorization = await this.authService.signIn(signInDto);
+
+    if (!authorization) {
+      throw new UnauthorizedException();
+    }
 
     return res
       .status(HttpStatus.OK)
-      .header({ authorization: token })
-      .json({ authorization: token });
+      .header({
+        authorization,
+        'Access-Control-Expose-Headers': 'Authorization',
+      })
+      .json({});
   }
 
   @HttpCode(HttpStatus.OK)
@@ -46,6 +50,6 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Get('profile')
   getProfile(@Request() req: any) {
-    return req.user;
+    return this.authService.getProfile(req.tokenPayload.sub);
   }
 }
