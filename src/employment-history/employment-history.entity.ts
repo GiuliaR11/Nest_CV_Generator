@@ -24,6 +24,12 @@ export class EmploymentHistory {
   @Column()
   description: string;
 
-  @ManyToOne(() => CV, (cv) => cv.employmentHistories)
+  @ManyToOne(() => CV, (cv) => cv.employmentHistories, {
+    cascade: true,
+  })
   cv: CV;
+
+  // @ManyToOne(() => CV, (cv) => cv.employmentHistories, {
+  //   onDelete: 'CASCADE',
+  // })
 }

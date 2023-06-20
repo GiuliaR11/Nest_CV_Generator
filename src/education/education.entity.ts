@@ -26,4 +26,8 @@ export class Education {
 
   @ManyToOne(() => CV, (cv) => cv.educations)
   cv: CV;
+
+  // @ManyToOne(() => CV, (cv) => cv.educations, {
+  //   onDelete: 'CASCADE',
+  // })
 }

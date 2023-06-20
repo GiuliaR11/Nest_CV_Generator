@@ -31,6 +31,7 @@ export class CV {
 
   @OneToOne(() => PersonalDetails, (personalDetails) => personalDetails.cv, {
     eager: true,
+    cascade: true,
   })
   @JoinColumn()
   personalDetails: PersonalDetails;

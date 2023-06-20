@@ -10,10 +10,6 @@ export class CvService {
     private cvsRepository: Repository<CV>,
   ) {}
 
-  // async findAll(): Promise<CV[]> {
-  //   return this.cvModel.find().exec();
-  // }
-
   async findOne(id: string): Promise<CV> {
     return this.cvsRepository.findOne(id);
   }
@@ -34,18 +30,13 @@ export class CvService {
   }
 
   async upsert(cvDto: CV): Promise<CV> {
-    console.log(cvDto);
-    const cv = cvDto.id ? this.cvsRepository.create(cvDto) : cvDto;
-    return await this.cvsRepository.save(cv);
+    // console.log(cvDto)
+    // const cv = cvDto.id ? this.cvsRepository.create(cvDto) : cvDto;
+    return await this.cvsRepository.save(cvDto);
   }
 
-  // async update(id: string, updateCVDto: CV): Promise<CV> {
-  //   return this.cvModel
-  //     .findByIdAndUpdate(id, updateCVDto, { new: true })
-  //     .exec();
-  // }
-
-  // async delete(id: string): Promise<CV> {
-  //   return this.cvModel.findByIdAndRemove(id).exec();
-  // }
+  async delete(id: string): Promise<any> {
+    const cv = await this.cvsRepository.findOne(id);
+    await this.cvsRepository.remove(cv);
+  }
 }

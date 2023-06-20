@@ -18,7 +18,6 @@ export class User {
   @Column()
   lastName: string;
 
-  // @OneToMany((type) => CV, (cv) => cv.user, { eager: true }) to include cvs[]
   @OneToMany((type) => CV, (cv) => cv.user)
   cvs: CV[];
 }
