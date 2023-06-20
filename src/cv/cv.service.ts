@@ -29,14 +29,13 @@ export class CvService {
     return await this.cvsRepository.save(cv);
   }
 
-  async upsert(cvDto: CV): Promise<CV> {
-    // console.log(cvDto)
-    // const cv = cvDto.id ? this.cvsRepository.create(cvDto) : cvDto;
-    return await this.cvsRepository.save(cvDto);
+  async upsert(cv: CV): Promise<CV> {
+    return await this.cvsRepository.save(cv);
   }
 
   async delete(id: string): Promise<any> {
     const cv = await this.cvsRepository.findOne(id);
     await this.cvsRepository.remove(cv);
+    return 'ok';
   }
 }

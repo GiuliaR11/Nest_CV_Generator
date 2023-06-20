@@ -24,10 +24,6 @@ export class Education {
   @Column()
   description?: string;
 
-  @ManyToOne(() => CV, (cv) => cv.educations)
+  @ManyToOne(() => CV, (cv) => cv.educations, { onDelete: 'CASCADE' })
   cv: CV;
-
-  // @ManyToOne(() => CV, (cv) => cv.educations, {
-  //   onDelete: 'CASCADE',
-  // })
 }

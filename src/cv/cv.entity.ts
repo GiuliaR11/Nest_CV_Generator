@@ -39,10 +39,16 @@ export class CV {
   @OneToMany(
     () => EmploymentHistory,
     (employmentHistory) => employmentHistory.cv,
-    { eager: true },
+    {
+      eager: true,
+      cascade: true,
+    },
   )
   employmentHistories: EmploymentHistory[];
 
-  @OneToMany(() => Education, (education) => education.cv, { eager: true })
+  @OneToMany(() => Education, (education) => education.cv, {
+    eager: true,
+    cascade: true,
+  })
   educations: Education[];
 }
