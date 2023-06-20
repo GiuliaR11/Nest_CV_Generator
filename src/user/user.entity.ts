@@ -9,12 +9,16 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @Column()
+  firstName: string;
 
-  @OneToMany((type) => CV, (cv) => cv.user, { eager: true })
+  @Column()
+  lastName: string;
+
+  // @OneToMany((type) => CV, (cv) => cv.user, { eager: true }) to include cvs[]
+  @OneToMany((type) => CV, (cv) => cv.user)
   cvs: CV[];
 }

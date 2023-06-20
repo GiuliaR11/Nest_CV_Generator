@@ -32,13 +32,6 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-  @Get(':email')
-  async findByEmail(@Param('email') email: string): Promise<User> {
-    return (await this.userService.findAll()).find(
-      (user) => user.email === email,
-    );
-  }
-
   @Get(':id/cvs')
   async findAllByUser(@Param('id') id: string): Promise<CV[]> {
     return this.cvService.findCVsByUser(id);
