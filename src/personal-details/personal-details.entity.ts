@@ -1,11 +1,5 @@
 import { CV } from 'src/cv/cv.entity';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  OneToOne,
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
 
 @Entity()
 export class PersonalDetails {
@@ -20,6 +14,9 @@ export class PersonalDetails {
 
   @Column()
   lastName: string;
+
+  @Column()
+  professionalSummary: string;
 
   @Column()
   email: string;

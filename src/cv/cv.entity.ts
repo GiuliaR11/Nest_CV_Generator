@@ -17,6 +17,15 @@ export class CV {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  name: string;
+
+  @Column()
+  templateColor: string;
+
+  @Column()
+  templateName: string;
+
   @ManyToOne(() => User, (user) => user.cvs)
   user: User;
 

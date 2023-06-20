@@ -28,10 +28,16 @@ export class CvService {
     });
   }
 
-  // async create(createCVDto: CV): Promise<CV> {
-  //   const createdCV = new this.cvModel(createCVDto);
-  //   return createdCV.save();
-  // }
+  async create(createCVDto: CV): Promise<CV> {
+    const cv = this.cvsRepository.create(createCVDto);
+    return await this.cvsRepository.save(cv);
+  }
+
+  async upsert(cvDto: CV): Promise<CV> {
+    console.log(cvDto);
+    const cv = cvDto.id ? this.cvsRepository.create(cvDto) : cvDto;
+    return await this.cvsRepository.save(cv);
+  }
 
   // async update(id: string, updateCVDto: CV): Promise<CV> {
   //   return this.cvModel
