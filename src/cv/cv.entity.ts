@@ -26,6 +26,15 @@ export class CV {
   @Column()
   templateName: string;
 
+  @Column()
+  technicalExpertise: string;
+
+  @Column()
+  languages: string;
+
+  @Column()
+  skills: string;
+
   @ManyToOne(() => User, (user) => user.cvs)
   user: User;
 
