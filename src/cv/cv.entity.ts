@@ -27,6 +27,9 @@ export class CV {
   templateName: string;
 
   @Column()
+  templateBackground: string;
+
+  @Column()
   technicalExpertise: string;
 
   @Column()
